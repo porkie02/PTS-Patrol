@@ -18,7 +18,7 @@ variable() {
 }
 
 deploycheck() {
-  dcheck=$(systemctl status pgpatrol | grep "\(running\)\>" | grep "\<since\>")
+  dcheck=$(systemctl is-active pgpatrol)
   if [ "$dcheck" != "" ]; then
     dstatus="✅ DEPLOYED"
   else dstatus="⚠️ NOT DEPLOYED"; fi
