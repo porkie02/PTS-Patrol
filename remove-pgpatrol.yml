@@ -32,3 +32,4 @@
         - '/opt/appdata/pgpatrol/'
         - '/etc/systemd/system/pgpatrol.service'
         - '/opt/pgpatrol/'
+        - '/var/plexguide/pgpatrol'
