@@ -19,13 +19,13 @@ variable() {
 
 deploycheck() {
   dcheck=$(systemctl is-active pgpatrol)
-  if [ "$dcheck" != "" ]; then
+  if [ "$dcheck" == "active" ]; then
     dstatus="✅ DEPLOYED"
   else dstatus="⚠️ NOT DEPLOYED"; fi
 }
 
 plexcheck() {
-  pcheck=$(docker ps | grep "\<plex\>")
+  pcheck=$(docker ps --format {{.Names}} | grep "plex")
   if [ "$pcheck" == "" ]; then
 
     tee <<-EOF
@@ -73,7 +73,6 @@ selection1() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Instantly Kick Video Transcodes?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚡ Reference: http://pgpatrol.pgblitz.com
 
 [1] False
 [2] True
@@ -91,10 +90,29 @@ selection2() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Instantly Kick Video Transcodes?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1] False
+[2] True
+
+EOF
+  read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
+  if [ "$typed" == "1" ]; then
+    echo "False" >/var/plexguide/pgpatrol/video.transcodes && question1
+  elif [ "$typed" == "2" ]; then
+    echo "True" >/var/plexguide/pgpatrol/video.transcodes && question1
+  else badinput; fi
+}
+
+selection3() {
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Limit Amount of Different IPs a User Can Make?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Set a Number from [1] 99
+Set a Number from [ 1 ] - [ 99 ]
 
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
@@ -103,7 +121,7 @@ EOF
   else badinput; fi
 }
 
-selection3() {
+selection4() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -124,6 +142,7 @@ EOF
 question1() {
 
   video=$(cat /var/plexguide/pgpatrol/video.transcodes)
+  video4k=$(cat /var/plexguide/pgpatrol/video.transcodes4k)
   ips=$(cat /var/plexguide/pgpatrol/multiple.ips)
   minutes=$(cat /var/plexguide/pgpatrol/kick.minutes)
 
@@ -134,10 +153,12 @@ question1() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-[1] Instantly Kick Video Transcodes?   [ $video ]
-[2] UserName | Multiple IPs?           [ $ips ]
-[3] Minutes  | Kick Paused Transcode?  [ $minutes ]
-[4] Deploy Plex - Patrol               [ $dstatus ]
+[1] Instantly Kick Video Transcodes?      [ $video ]
+[2] Instantly Kick Video 4k Transcodes?   [ $video4k ]
+[3] UserName | Multiple IPs?              [ $ips ]
+[4] Minutes  | Kick Paused Transcode?     [ $minutes ]
+
+[5] Deploy Plex - Patrol                  [ $dstatus ]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
@@ -154,6 +175,8 @@ EOF
   elif [ "$typed" == "3" ]; then
     selection3
   elif [ "$typed" == "4" ]; then
+    selection3
+  elif [ "$typed" == "5" ]; then
     ansible-playbook /opt/pgpatrol/pgpatrol.yml && question1
   elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
     exit
@@ -164,6 +187,7 @@ EOF
 plexcheck
 token
 variable /var/plexguide/pgpatrol/video.transcodes "False"
+variable /var/plexguide/pgpatrol/video.transcodes4k "True"
 variable /var/plexguide/pgpatrol/multiple.ips "2"
 variable /var/plexguide/pgpatrol/kick.minutes "1"
 deploycheck

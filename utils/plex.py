@@ -36,16 +36,13 @@ class Plex:
         try:
             r = requests.get(request_url, headers=headers, verify=False)
             if r.status_code == 200 and r.headers['Content-Type'] == 'application/json':
-                log.debug(
-                    "Server responded with status_code=%r, content: %r", r.status_code, r.json())
+                log.debug("Server responded with status_code=%r, content: %r", r.status_code, r.json())
                 return True
             else:
-                log.debug(
-                    "Server responded with status_code=%r, content: %r", r.status_code, r.content)
+                log.debug("Server responded with status_code=%r, content: %r", r.status_code, r.content)
                 return False
         except Exception:
-            log.exception(
-                "Exception validating server token=%r, url=%r: ", self.token, self.url)
+            log.exception("Exception validating server token=%r, url=%r: ", self.token, self.url)
             return False
 
     def get_streams(self):
@@ -66,16 +63,13 @@ class Plex:
             r = requests.get(request_url, headers=headers, verify=False)
             if r.status_code == 200 and r.headers['Content-Type'] == 'application/json':
                 result = r.json()
-                log.debug(
-                    "Server responded with status_code=%r, content: %r", r.status_code, r.content)
+                log.debug("Server responded with status_code=%r, content: %r", r.status_code, r.content)
 
                 if 'MediaContainer' not in result:
-                    log.error(
-                        "Failed to retrieve streams from server %r", self.name)
+                    log.error("Failed to retrieve streams from server %r", self.name)
                     return None
                 elif 'Video' not in result['MediaContainer'] and 'Metadata' not in result['MediaContainer']:
-                    log.debug(
-                        "There were no streams to check for server %r", self.name)
+                    log.debug("There were no streams to check for server %r", self.name)
                     return []
 
                 streams = []
@@ -89,8 +83,7 @@ class Plex:
                     self.token, request_url, r.status_code, r.content)
                 return None
         except Exception:
-            log.exception(
-                "Exception retrieving streams from request_url=%r, token=%r: ", request_url, self.token)
+            log.exception("Exception retrieving streams from request_url=%r, token=%r: ", request_url, self.token)
             return None
 
     def kill_stream(self, session_id, reason):
@@ -111,10 +104,8 @@ class Plex:
             'reason': reason
         }
         try:
-            r = requests.get(request_url, headers=headers,
-                             params=payload, verify=False)
-            log.debug("Server responded with status_code=%r, content: %r",
-                      r.status_code, r.content)
+            r = requests.get(request_url, headers=headers, params=payload, verify=False)
+            log.debug("Server responded with status_code=%r, content: %r", r.status_code, r.content)
             if r.status_code == 200:
                 return True
             else:
@@ -137,6 +128,14 @@ class PlexStream:
         else:
             self.player = 'Unknown'
             self.ip = 'Unknown'
+
+        self.quality = "Unknown"
+        if 'Media' in stream:
+            for media in stream['Media']:
+                if 'Part' in media:
+                    for part in media['Part']:
+                        if 'Stream' in part and 'displayTitle' in part['Stream'][0]:
+                            self.quality = part['Stream'][0]['displayTitle'].split(' ')[0].upper()
 
         if 'Session' in stream:
             self.session_id = stream['Session']['id']
@@ -167,8 +166,7 @@ class PlexStream:
             self.title = 'Unknown'
         else:
             if stream['type'] == 'episode':
-                self.title = u"{} {}x{}".format(
-                    stream['grandparentTitle'], stream['parentIndex'], stream['index'])
+                self.title = u"{} {}x{}".format(stream['grandparentTitle'], stream['parentIndex'], stream['index'])
             else:
                 self.title = stream['title']
 
