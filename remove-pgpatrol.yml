@@ -31,4 +31,3 @@
       with_items:
         - '/opt/appdata/pgpatrol/'
         - '/etc/systemd/system/pgpatrol.service'
-        - '/var/plexguide/pgpatrol'
