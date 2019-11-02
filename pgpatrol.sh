@@ -77,6 +77,7 @@ selection1() {
 [1] False
 [2] True
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
   if [ "$typed" == "1" ]; then
@@ -90,12 +91,13 @@ selection2() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Instantly Kick Video Transcodes?
+🚀 Instantly Kick 4k - Video Transcodes?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] False
 [2] True
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
   if [ "$typed" == "1" ]; then
@@ -109,15 +111,19 @@ selection3() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Limit Amount of Different IPs a User Can Make?
+🚀 Instantly Kick Audio Transcodes?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Set a Number from [ 1 ] - [ 99 ]
+[1] False
+[2] True
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
-  if [[ "$typed" -ge "1" && "$typed" -le "99" ]]; then
-    echo "$typed" >/var/plexguide/pgpatrol/multiple.ips && question1
+  if [ "$typed" == "1" ]; then
+    echo "False" >/var/plexguide/pgpatrol/audio.transcodes && question1
+  elif [ "$typed" == "2" ]; then
+    echo "True" >/var/plexguide/pgpatrol/audio.transcodes && question1
   else badinput; fi
 }
 
@@ -125,20 +131,54 @@ selection4() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Limit Amount of Different IPs a User Can Make?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Set a Number from [ 1 ] - [ 10 ]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
+  if [[ "$typed" -ge "1" && "$typed" -le "10" ]]; then
+    echo "$typed" >/var/plexguide/pgpatrol/multiple.ips && question1
+  else badinput; fi
+}
+
+
+selection5() {
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Limit How Long a User Can Pause For!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+Set a Number from [ 5 ] - [ 250 ] Mintues
 
-Set a Number from [5] 999 Mintues
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
-  if [[ "$typed" -ge "1" && "$typed" -le "999" ]]; then
+  if [[ "$typed" -ge "1" && "$typed" -le "250" ]]; then
     echo "$typed" >/var/plexguide/pgpatrol/kick.minutes && question1
   else badinput; fi
 }
 
 selection5() {
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Check Interval # how often to check the active streams in seconds
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Set a Number from [ 60 ] - [ 240 ] seconds
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
+  if [[ "$typed" -ge "59" && "$typed" -le "241" ]]; then
+    echo "$typed" /var/plexguide/pgpatrol/check.interva && question1
+  else badinput; fi
+}
+selection7() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -149,7 +189,7 @@ selection5() {
 
 [ 2 ] - YES
 
-
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
 
@@ -177,12 +217,14 @@ question1() {
 
 [1] Instantly Kick Video Transcodes?      [ $video ]
 [2] Instantly Kick Video 4k Transcodes?   [ $video4k ]
-[3] UserName | Multiple IPs?              [ $ips ]
-[4] Minutes  | Kick Paused Transcode?     [ $minutes ]
+[3] Instantly Kick Audio Transcodes?      [ $audio ]
+[4] UserName | Multiple IPs?              [ $ips ]
+[5] Minutes  | Kick Paused Transcode?     [ $minutes ]
+[6] Check Interval                        [ $interval ]
 
-[5] Deploy Plex - Patrol                  [ $dstatus ]
+[7] Deploy Plex - Patrol                  [ $dstatus ]
 
-[6] Remove Plex - Patrol
+[8] Remove Plex - Patrol
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
@@ -201,9 +243,13 @@ EOF
   elif [ "$typed" == "4" ]; then
     selection4
   elif [ "$typed" == "5" ]; then
-	ansible-playbook /opt/pgpatrol/pgpatrol.yml && question1
+    selection5
   elif [ "$typed" == "6" ]; then
-	selection5
+    selection6
+  elif [ "$typed" == "7" ]; then
+	ansible-playbook /opt/pgpatrol/pgpatrol.yml && question1
+  elif [ "$typed" == "8" ]; then
+	selection7
   elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
     exit
   else badinput; fi
@@ -214,6 +260,8 @@ plexcheck
 token
 variable /var/plexguide/pgpatrol/video.transcodes "False"
 variable /var/plexguide/pgpatrol/video.transcodes4k "True"
+variable /var/plexguide/pgpatrol/audio.transcodes "False"
+variable /var/plexguide/pgpatrol/check.interval "90"
 variable /var/plexguide/pgpatrol/multiple.ips "1"
 variable /var/plexguide/pgpatrol/kick.minutes "5"
 deploycheck

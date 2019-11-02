@@ -36,13 +36,21 @@
       shell: 'cat /var/plexguide/pgpatrol/multiple.ips'
       register: multipleips
 
-    - name: Video Transcodes Info
+    - name: Kick Video Transcodes
       shell: 'cat /var/plexguide/pgpatrol/video.transcodes'
       register: videotranscodes
       
-    - name: kick 4k Transcodes
+    - name: Kick 4k Transcodes
       shell: 'cat /var/plexguide/pgpatrol/video.transcodes4k'
       register: video4k
+
+    - name: Kick Audio Transcodes
+      shell: 'cat /var/plexguide/pgpatrol/audio.transcodes'
+      register: audiotranscodes
+
+    - name: check interval
+      shell: 'cat /var/plexguide/pgpatrol/check.interval'
+      register: checkinterval
 
     - name: Paused Info
       shell: 'cat /var/plexguide/pgpatrol/kick.minutes'
