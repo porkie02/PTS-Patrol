@@ -260,9 +260,9 @@ EOF
 # FUNCTIONS END ##############################################################
 plexcheck
 token
-variable /var/plexguide/pgpatrol/video.transcodes "False"
-variable /var/plexguide/pgpatrol/video.transcodes4k "True"
-variable /var/plexguide/pgpatrol/audio.transcodes "False"
+variable /var/plexguide/pgpatrol/video.transcodes "false"
+variable /var/plexguide/pgpatrol/video.transcodes4k "true"
+variable /var/plexguide/pgpatrol/audio.transcodes "false"
 variable /var/plexguide/pgpatrol/check.interval "90"
 variable /var/plexguide/pgpatrol/multiple.ips "1"
 variable /var/plexguide/pgpatrol/kick.minutes "5"
