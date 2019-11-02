@@ -42,7 +42,7 @@
       
     - name: kick 4k Transcodes
       shell: 'cat /var/plexguide/pgpatrol/video.transcodes4k'
-      register: videotranscodes4k
+      register: video4k
 
     - name: Paused Info
       shell: 'cat /var/plexguide/pgpatrol/kick.minutes'
@@ -76,7 +76,7 @@
         force: yes
 
     - name: Import default config
-      copy:
+      template:
         src: /opt/appdata/pgpatrol/settings.ini.default
         dest: /opt/appdata/pgpatrol/settings.ini
         owner: '1000'
@@ -97,7 +97,7 @@
       when: pgp.stat.exists
 
     - name: PTS-Patrol Service
-      copy:
+      template:
         src: /opt/appdata/pgpatrol/system/pgpatrol.service.j2
         dest: /etc/systemd/system/pgpatrol.service
         force: yes
