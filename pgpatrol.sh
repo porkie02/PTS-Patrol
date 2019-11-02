@@ -207,6 +207,8 @@ question1() {
   video4k=$(cat /var/plexguide/pgpatrol/video.transcodes4k)
   ips=$(cat /var/plexguide/pgpatrol/multiple.ips)
   minutes=$(cat /var/plexguide/pgpatrol/kick.minutes)
+  audio=$(cat /var/plexguide/pgpatrol/audio.transcodes)
+  interval=$(cat /var/plexguide/pgpatrol/check.interval)
 
   tee <<-EOF
 
