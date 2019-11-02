@@ -19,7 +19,7 @@
 
     - name: Stop service
       service:
-        name: pgpatrolz
+        name: pgpatrol
         
         state: stopped
       when: pgp.stat.exists
