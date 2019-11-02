@@ -81,9 +81,9 @@ selection1() {
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
   if [ "$typed" == "1" ]; then
-    echo "False" >/var/plexguide/pgpatrol/video.transcodes && question1
+    echo "false" >/var/plexguide/pgpatrol/video.transcodes && question1
   elif [ "$typed" == "2" ]; then
-    echo "True" >/var/plexguide/pgpatrol/video.transcodes && question1
+    echo "true" >/var/plexguide/pgpatrol/video.transcodes && question1
   else badinput; fi
 }
 
@@ -101,9 +101,9 @@ selection2() {
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
   if [ "$typed" == "1" ]; then
-    echo "False" >/var/plexguide/pgpatrol/video.transcodes4k && question1
+    echo "false" >/var/plexguide/pgpatrol/video.transcodes4k && question1
   elif [ "$typed" == "2" ]; then
-    echo "True" >/var/plexguide/pgpatrol/video.transcodes4k && question1
+    echo "true" >/var/plexguide/pgpatrol/video.transcodes4k && question1
   else badinput; fi
 }
 
@@ -121,9 +121,9 @@ selection3() {
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
   if [ "$typed" == "1" ]; then
-    echo "False" >/var/plexguide/pgpatrol/audio.transcodes && question1
+    echo "false" >/var/plexguide/pgpatrol/audio.transcodes && question1
   elif [ "$typed" == "2" ]; then
-    echo "True" >/var/plexguide/pgpatrol/audio.transcodes && question1
+    echo "true" >/var/plexguide/pgpatrol/audio.transcodes && question1
   else badinput; fi
 }
 
