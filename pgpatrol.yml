@@ -96,14 +96,14 @@
         state: stopped
       when: pgp.stat.exists
 
-    - name: PG Patrol Service
+    - name: PTS-Patrol Service
       template:
-        src: /opt/appdata/pgpatrol/system/pgpatrol.service
+        src: /opt/appdata/pgpatrol/system/pgpatrol.service.j2
         dest: /etc/systemd/system/pgpatrol.service
         force: yes
 
     - name: Daemon-Reload
       systemd: state=stopped name=pgpatrol daemon_reload=yes enabled=no
 
-    - name: Start PGPatrol
+    - name: Start PTS-Patrol
       systemd: state=started name=pgpatrol enabled=yes

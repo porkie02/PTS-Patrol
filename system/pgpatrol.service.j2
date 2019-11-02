@@ -3,6 +3,8 @@ Description=Plex Patrol
 After=network-online.target
 
 [Service]
+User=0
+Group=0
 Type=simple
 WorkingDirectory=/opt/appdata/pgpatrol
 ExecStart=/opt/appdata/pgpatrol/patrol.py
