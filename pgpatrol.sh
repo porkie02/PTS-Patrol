@@ -138,6 +138,28 @@ EOF
   else badinput; fi
 }
 
+selection5() {
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Remove Plex Patrol
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ 1 ] - NO
+
+[ 2 ] - YES
+
+
+EOF
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+
+  if [ "$typed" == "1" ]; then
+    selection1
+  elif [ "$typed" == "2" ]; then; then
+	ansible-playbook /opt/pgpatrol/remove-pgpatrol.yml && question1
+  else badinput; fi
+}
+
 # FIRST QUESTION
 question1() {
 
@@ -160,6 +182,8 @@ question1() {
 
 [5] Deploy Plex - Patrol                  [ $dstatus ]
 
+[6] Remove Plex - Patrol
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -177,7 +201,9 @@ EOF
   elif [ "$typed" == "4" ]; then
     selection4
   elif [ "$typed" == "5" ]; then
-    ansible-playbook /opt/pgpatrol/pgpatrol.yml && question1
+	ansible-playbook /opt/pgpatrol/pgpatrol.yml && question1
+  elif [ "$typed" == "6" ]; then
+	selection5
   elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
     exit
   else badinput; fi
@@ -188,7 +214,7 @@ plexcheck
 token
 variable /var/plexguide/pgpatrol/video.transcodes "False"
 variable /var/plexguide/pgpatrol/video.transcodes4k "True"
-variable /var/plexguide/pgpatrol/multiple.ips "2"
-variable /var/plexguide/pgpatrol/kick.minutes "1"
+variable /var/plexguide/pgpatrol/multiple.ips "1"
+variable /var/plexguide/pgpatrol/kick.minutes "5"
 deploycheck
 question1
