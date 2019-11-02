@@ -77,7 +77,7 @@
 
     - name: Import default config
       template:
-        src: /opt/appdata/pgpatrol/settings.ini.default
+        src: /opt/pgpatrol/settings.ini.default
         dest: /opt/appdata/pgpatrol/settings.ini
         owner: '1000'
         group: '1000'
