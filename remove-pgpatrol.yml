@@ -19,18 +19,17 @@
 
     - name: Stop service
       service:
-        name: pgpatrol
+        name: pgpatrolz
+        
         state: stopped
       when: pgp.stat.exists
 
     - name: Daemon-PTS-Patrol stop
       systemd: state=stopped name=pgpatrol daemon_reload=yes enabled=no
 
-    - name: remove files and directories
-      file: /etc/systemd/system/pgpatrol.service
-
     - name: Remove Basic Directories
       file: 'path={{item}} state=absent mode=0775 owner=1000 group=1000'
       with_items:
         - '/opt/appdata/pgpatrol/'
         - '/etc/systemd/system/pgpatrol.service'
+        - '/opt/pgpatrol/'
