@@ -155,7 +155,7 @@ EOF
 
   if [ "$typed" == "1" ]; then
     selection1
-  elif [ "$typed" == "2" ]; then; then
+  elif [ "$typed" == "2" ]; then
 	ansible-playbook /opt/pgpatrol/remove-pgpatrol.yml && question1
   else badinput; fi
 }
