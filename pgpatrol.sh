@@ -175,7 +175,7 @@ EOF
   elif [ "$typed" == "3" ]; then
     selection3
   elif [ "$typed" == "4" ]; then
-    selection3
+    selection4
   elif [ "$typed" == "5" ]; then
     ansible-playbook /opt/pgpatrol/pgpatrol.yml && question1
   elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
