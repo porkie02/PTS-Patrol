@@ -252,13 +252,8 @@ EOF
 	ansible-playbook /opt/pgpatrol/pgpatrol.yml && question1
   elif [ "$typed" == "8" ]; then
 	selection7
-  elif [[ "$typed" == "z" || "$typed" == "Z" ]]; then
-    exit
-  else
-    badinput1
-  fi
-
-
+elif [ "$typed" == "Z" ] || [ "$typed" == "z" ]; then
+  exit
 }
 
 # FUNCTIONS END ##############################################################
