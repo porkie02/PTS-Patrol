@@ -253,13 +253,10 @@ EOF
   elif [ "$typed" == "8" ]; then
 	selection7
   elif [ "$typed" == "Z" ] || [ "$typed" == "z" ]; then
-    exit
- else
+   clear
    bash /opt/plexguide/menu/start/start.sh
-   exit
  fi
-bash /opt/plexguide/menu/start/start.sh
-exit
+
 }
 
 # FUNCTIONS END ##############################################################
