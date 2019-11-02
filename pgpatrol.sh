@@ -254,6 +254,7 @@ EOF
 	selection7
 elif [ "$typed" == "Z" ] || [ "$typed" == "z" ]; then
   exit
+ fi
 }
 
 # FUNCTIONS END ##############################################################
