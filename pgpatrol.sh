@@ -6,7 +6,6 @@
 # GNU:        General Public License v3.0
 ################################################################################
 source /opt/plexguide/menu/functions/functions.sh
-source /opt/plexguide/menu/functions/watchtower.sh
 source /opt/plexguide/menu/functions/install.sh
 # KEY VARIABLE RECALL & EXECUTION
 mkdir -p /var/plexguide/pgpatrol
