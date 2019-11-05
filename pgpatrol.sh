@@ -5,7 +5,8 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-
+source /opt/plexguide/menu/functions/functions.sh
+source /opt/plexguide/menu/functions/install.sh
 # KEY VARIABLE RECALL & EXECUTION
 mkdir -p /var/plexguide/pgpatrol
 
@@ -15,6 +16,12 @@ mkdir -p /var/plexguide/pgpatrol
 variable() {
   file="$1"
   if [ ! -e "$file" ]; then echo "$2" >$1; fi
+}
+
+doneenter(){
+ echo
+  read -p 'All done | PRESS [ENTER] ' typed </dev/tty
+  question1
 }
 
 deploycheck() {
@@ -79,7 +86,7 @@ selection1() {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [ "$typed" == "1" ]; then
     echo "false" >/var/plexguide/pgpatrol/video.transcodes && question1
   elif [ "$typed" == "2" ]; then
@@ -99,7 +106,7 @@ selection2() {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [ "$typed" == "1" ]; then
     echo "false" >/var/plexguide/pgpatrol/video.transcodes4k && question1
   elif [ "$typed" == "2" ]; then
@@ -119,7 +126,7 @@ selection3() {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [ "$typed" == "1" ]; then
     echo "false" >/var/plexguide/pgpatrol/audio.transcodes && question1
   elif [ "$typed" == "2" ]; then
@@ -138,7 +145,7 @@ Set a Number from [ 1 ] - [ 10 ]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "1" && "$typed" -le "10" ]]; then
     echo "$typed" >/var/plexguide/pgpatrol/multiple.ips && question1
   else badinput; fi
@@ -156,7 +163,7 @@ Set a Number from [ 5 ] - [ 250 ] Mintues
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "1" && "$typed" -le "250" ]]; then
     echo "$typed" >/var/plexguide/pgpatrol/kick.minutes && question1
   else badinput; fi
@@ -173,16 +180,16 @@ Set a Number from [ 60 ] - [ 240 ] seconds
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p 'Type Number | PRESS [ENTER] ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "59" && "$typed" -le "241" ]]; then
-    echo "$typed" /var/plexguide/pgpatrol/check.interva && question1
+    echo "$typed" /var/plexguide/pgpatrol/check.interval && question1
   else badinput; fi
 }
 selection7() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Remove Plex Patrol
+🚀 Remove Plex Patrol  || l3uddz/plex_patrol
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [ 1 ] - NO
@@ -200,6 +207,37 @@ EOF
   else badinput; fi
 }
 
+credits(){
+clear
+chk=$(figlet Plex Patrol | lolcat )
+
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Plex Patrol Credits 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+$chk
+
+#########################################################################
+# Author:   l3uddz                                                      #
+# URL:      https://github.com/l3uddz/plex_patrol                       #
+# Coder of plex_patrol                                                  #
+# --                                                                    #
+# Author(s):     l3uddz, desimaniac                                     #
+# URL:           https://github.com/cloudbox/cloudbox                   #
+# --                                                                    #
+#         Part of the Cloudbox project: https://cloudbox.works          #
+#########################################################################
+#                   GNU General Public License v3.0                     #
+#########################################################################
+EOF
+
+ echo
+  read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
+  clear
+  question1
+}
 # FIRST QUESTION
 question1() {
 
@@ -213,20 +251,22 @@ question1() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Plex - Patrol Interface
+🚀 Plex - Patrol Interface || l3uddz/plex_patrol
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 [1] Instantly Kick Video Transcodes?      [ $video ]
 [2] Instantly Kick Video 4k Transcodes?   [ $video4k ]
 [3] Instantly Kick Audio Transcodes?      [ $audio ]
-[4] UserName | Multiple IPs?              [ $ips ]
+[4] Multiple IPs for UserName             [ $ips ]
 [5] Minutes  | Kick Paused Transcode?     [ $minutes ]
 [6] Check Interval                        [ $interval ]
 
 [7] Deploy Plex - Patrol                  [ $dstatus ]
 
 [8] Remove Plex - Patrol
+
+[C] Credits
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
@@ -236,25 +276,66 @@ EOF
 
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
 
-  if [ "$typed" == "1" ]; then
+  case $typed in
+  1)
     selection1
-  elif [ "$typed" == "2" ]; then
+	clear
+	question1
+    ;;
+  2)
     selection2
-  elif [ "$typed" == "3" ]; then
+	clear
+	question1
+    ;;
+  3)
     selection3
-  elif [ "$typed" == "4" ]; then
+	clear
+	question1
+    ;;
+  4)
     selection4
-  elif [ "$typed" == "5" ]; then
+	clear
+	question1
+    ;;
+  5)
     selection5
-  elif [ "$typed" == "6" ]; then
+	clear
+	question1
+    ;;
+  6)
     selection6
-  elif [ "$typed" == "7" ]; then
-	ansible-playbook /opt/pgpatrol/pgpatrol.yml && question1
-  elif [ "$typed" == "8" ]; then
+	clear
+	question1
+    ;;
+  7)
+	ansible-playbook /opt/pgpatrol/pgpatrol.yml && sleep 5
+	clear	
+	question1
+    ;;
+  8)
 	selection7
-  elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
+	question1
+    ;;
+  C)
+	credits
+	clear
+	question1
+	;;
+  c)		
+	credits
+	clear
+	question1
+	;;
+  z)
     exit
-  else badinput; fi
+    ;;
+  Z)
+    exit
+    ;;
+  *)
+    question1
+    ;;
+  esac
 }
 
 # FUNCTIONS END ##############################################################
