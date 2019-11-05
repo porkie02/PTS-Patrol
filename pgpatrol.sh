@@ -235,27 +235,50 @@ question1() {
 
 EOF
 
-  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  read -p 'Type a Number | Press [ENTER]: ' typed </dev/tty
 
-  if [ "$typed" == "1" ]; then
+  case $typed in
+  1)
     selection1
-  elif [ "$typed" == "2" ]; then
+	question1
+    ;;
+  2)
     selection2
-  elif [ "$typed" == "3" ]; then
+	question1
+    ;;
+  3)
     selection3
-  elif [ "$typed" == "4" ]; then
+	question1
+    ;;
+  4)
     selection4
-  elif [ "$typed" == "5" ]; then
+	question1
+    ;;
+  5)
     selection5
-  elif [ "$typed" == "6" ]; then
+	question1
+    ;;
+  6)
     selection6
-  elif [ "$typed" == "7" ]; then
-	ansible-playbook /opt/pgpatrol/pgpatrol.yml && question1
-  elif [ "$typed" == "8" ]; then
+    ;;
+  7)
+	ansible-playbook /opt/pgpatrol/pgpatrol.yml
+	question1
+    ;;
+  8)
 	selection7
-   elif [ "$typed" == "Z" ] || [ "$typed" == "z" ]; then
+	question1
+    ;;
+  z)
     exit
-  else badinput; fi
+    ;;
+  Z)
+    exit
+    ;;
+  *)
+    question1
+    ;;
+  esac
 }
 
 # FUNCTIONS END ##############################################################
