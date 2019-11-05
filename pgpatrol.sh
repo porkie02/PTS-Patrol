@@ -80,7 +80,7 @@ selection1() {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [ "$typed" == "1" ]; then
     echo "false" >/var/plexguide/pgpatrol/video.transcodes && question1
   elif [ "$typed" == "2" ]; then
@@ -100,7 +100,7 @@ selection2() {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [ "$typed" == "1" ]; then
     echo "false" >/var/plexguide/pgpatrol/video.transcodes4k && question1
   elif [ "$typed" == "2" ]; then
@@ -120,7 +120,7 @@ selection3() {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [ "$typed" == "1" ]; then
     echo "false" >/var/plexguide/pgpatrol/audio.transcodes && question1
   elif [ "$typed" == "2" ]; then
@@ -139,7 +139,7 @@ Set a Number from [ 1 ] - [ 10 ]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "1" && "$typed" -le "10" ]]; then
     echo "$typed" >/var/plexguide/pgpatrol/multiple.ips && question1
   else badinput; fi
@@ -157,7 +157,7 @@ Set a Number from [ 5 ] - [ 250 ] Mintues
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "1" && "$typed" -le "250" ]]; then
     echo "$typed" >/var/plexguide/pgpatrol/kick.minutes && question1
   else badinput; fi
@@ -174,7 +174,7 @@ Set a Number from [ 60 ] - [ 240 ] seconds
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "59" && "$typed" -le "241" ]]; then
     echo "$typed" /var/plexguide/pgpatrol/check.interva && question1
   else badinput; fi
@@ -221,7 +221,7 @@ question1() {
 [1] Instantly Kick Video Transcodes?      [ $video ]
 [2] Instantly Kick Video 4k Transcodes?   [ $video4k ]
 [3] Instantly Kick Audio Transcodes?      [ $audio ]
-[4] UserName | Multiple IPs?              [ $ips ]
+[4] Multiple IPs for UserName             [ $ips ]
 [5] Minutes  | Kick Paused Transcode?     [ $minutes ]
 [6] Check Interval                        [ $interval ]
 
@@ -235,7 +235,7 @@ question1() {
 
 EOF
 
-read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
 
   case $typed in
   1)
