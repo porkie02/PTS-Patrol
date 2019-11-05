@@ -176,14 +176,14 @@ Set a Number from [ 60 ] - [ 240 ] seconds
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "59" && "$typed" -le "241" ]]; then
-    echo "$typed" /var/plexguide/pgpatrol/check.interva && question1
+    echo "$typed" /var/plexguide/pgpatrol/check.interval && question1
   else badinput; fi
 }
 selection7() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Remove Plex Patrol
+🚀 Remove Plex Patrol  || l3uddz/plex_patrol
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [ 1 ] - NO
@@ -214,7 +214,7 @@ question1() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Plex - Patrol Interface
+🚀 Plex - Patrol Interface || l3uddz/plex_patrol
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
