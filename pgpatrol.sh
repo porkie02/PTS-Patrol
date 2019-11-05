@@ -235,6 +235,7 @@ EOF
 
  echo
   read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
+  clear
   question1
 }
 # FIRST QUESTION
@@ -278,30 +279,37 @@ EOF
   case $typed in
   1)
     selection1
+	clear
 	question1
     ;;
   2)
     selection2
+	clear
 	question1
     ;;
   3)
     selection3
+	clear
 	question1
     ;;
   4)
     selection4
+	clear
 	question1
     ;;
   5)
     selection5
+	clear
 	question1
     ;;
   6)
     selection6
-		question1
+	clear
+	question1
     ;;
   7)
-	ansible-playbook /opt/pgpatrol/pgpatrol.yml
+	ansible-playbook /opt/pgpatrol/pgpatrol.yml && sleep 5
+	clear	
 	question1
     ;;
   8)
@@ -310,10 +318,12 @@ EOF
     ;;
   C)
 	credits
+	clear
 	question1
 	;;
   c)		
 	credits
+	clear
 	question1
 	;;
   z)
