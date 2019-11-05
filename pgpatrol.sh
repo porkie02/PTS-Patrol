@@ -18,6 +18,12 @@ variable() {
   if [ ! -e "$file" ]; then echo "$2" >$1; fi
 }
 
+doneenter(){
+ echo
+  read -p 'All done | PRESS [ENTER] ' typed </dev/tty
+  question1
+}
+
 deploycheck() {
   dcheck=$(systemctl is-active pgpatrol)
   if [ "$dcheck" == "active" ]; then
@@ -201,6 +207,40 @@ EOF
   else badinput; fi
 }
 
+credits(){
+clear
+
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Plex Patrol Credits 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        _                            _             _
+  _ __ | | _____  __     _ __   __ _| |_ _ __ ___ | |
+ | '_ \| |/ _ \ \/ /    | '_ \ / _` | __| '__/ _ \| |
+ | |_) | |  __/>  <     | |_) | (_| | |_| | | (_) | |
+ | .__/|_|\___/_/\_\____| .__/ \__,_|\__|_|  \___/|_|
+ |_|              |_____|_|
+
+#########################################################################
+# Author:   l3uddz                                                      #
+# URL:      https://github.com/l3uddz/plex_patrol                       #
+# Coder of plex_patrol                                                  #
+# --                                                                    #
+# Author(s):     l3uddz, desimaniac                                     #
+# URL:           https://github.com/cloudbox/cloudbox                   #
+# --                                                                    #
+#         Part of the Cloudbox project: https://cloudbox.works          #
+#########################################################################
+#                   GNU General Public License v3.0                     #
+#########################################################################
+EOF
+
+ echo
+  read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
+  question1
+}
 # FIRST QUESTION
 question1() {
 
@@ -228,6 +268,8 @@ question1() {
 [7] Deploy Plex - Patrol                  [ $dstatus ]
 
 [8] Remove Plex - Patrol
+
+[C] Credits
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
@@ -260,6 +302,7 @@ EOF
     ;;
   6)
     selection6
+		question1
     ;;
   7)
 	ansible-playbook /opt/pgpatrol/pgpatrol.yml
@@ -269,6 +312,14 @@ EOF
 	selection7
 	question1
     ;;
+  C)
+	credits
+	question1
+	;;
+  c)		
+	credits
+	question1
+	;;
   z)
     exit
     ;;
