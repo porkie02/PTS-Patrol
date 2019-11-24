@@ -25,7 +25,7 @@ doneenter(){
 }
 
 deploycheck() {
-  dcheck=$(systemctl is-active pgpatrol)
+  dcheck=$(systemctl is-active pgpatrol.service)
   if [ "$dcheck" == "active" ]; then
     dstatus="✅ DEPLOYED"
   else dstatus="⚠️ NOT DEPLOYED"; fi
@@ -73,7 +73,6 @@ badinput() {
   read -p '⛔️ ERROR - BAD INPUT! | PRESS [ENTER] ' typed </dev/tty
   question1
 }
-
 selection1() {
   tee <<-EOF
 
@@ -87,13 +86,13 @@ selection1() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
-  if [ "$typed" == "1" ]; then
-    echo "false" >/var/plexguide/pgpatrol/video.transcodes && question1
-  elif [ "$typed" == "2" ]; then
-    echo "true" >/var/plexguide/pgpatrol/video.transcodes && question1
-  else badinput; fi
-}
 
+  case $typed in
+  1) echo -e "false" >/var/plexguide/pgpatrol/video.transcodes && question1 ;;
+  2) echo -e"true" >/var/plexguide/pgpatrol/video.transcodes && question1 ;;
+  *) badinput ;;
+  esac
+}
 selection2() {
   tee <<-EOF
 
@@ -107,13 +106,13 @@ selection2() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
-  if [ "$typed" == "1" ]; then
-    echo "false" >/var/plexguide/pgpatrol/video.transcodes4k && question1
-  elif [ "$typed" == "2" ]; then
-    echo "true" >/var/plexguide/pgpatrol/video.transcodes4k && question1
-  else badinput; fi
-}
 
+  case $typed in
+  1) echo -e "false" >/var/plexguide/pgpatrol/video.transcodes4k && question1 ;;
+  2) echo -e "true" >/var/plexguide/pgpatrol/video.transcodes4k && question1 ;;
+  *) badinput ;;
+  esac
+}
 selection3() {
   tee <<-EOF
 
@@ -127,13 +126,13 @@ selection3() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
-  if [ "$typed" == "1" ]; then
-    echo "false" >/var/plexguide/pgpatrol/audio.transcodes && question1
-  elif [ "$typed" == "2" ]; then
-    echo "true" >/var/plexguide/pgpatrol/audio.transcodes && question1
-  else badinput; fi
-}
 
+  case $typed in
+  1) echo -e "false" >/var/plexguide/pgpatrol/audio.transcodes && question1 ;;
+  2) echo -e "true" >/var/plexguide/pgpatrol/audio.transcodes && question1 ;;
+  *) badinput ;;
+  esac
+}
 selection4() {
   tee <<-EOF
 
@@ -150,8 +149,6 @@ EOF
     echo "$typed" >/var/plexguide/pgpatrol/multiple.ips && question1
   else badinput; fi
 }
-
-
 selection5() {
   tee <<-EOF
 
@@ -168,8 +165,7 @@ EOF
     echo "$typed" >/var/plexguide/pgpatrol/kick.minutes && question1
   else badinput; fi
 }
-
-selection5() {
+selection6() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -200,13 +196,12 @@ selection7() {
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
 
-  if [ "$typed" == "1" ]; then
-    selection1
-  elif [ "$typed" == "2" ]; then
-	ansible-playbook /opt/pgpatrol/remove-pgpatrol.yml && question1
-  else badinput; fi
+ case $typed in
+ 1) question1 ;; 
+ 2) ansible-playbook /opt/pgpatrol/remove-pgpatrol.yml && question1 ;;
+ *) badinput ;;
+ esac
 }
-
 credits(){
 clear
 chk=$(figlet Plex Patrol | lolcat )
@@ -235,11 +230,12 @@ EOF
 
  echo
   read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
-  clear
-  question1
+  clear && question1
 }
 # FIRST QUESTION
 question1() {
+
+deploycheck
 
   video=$(cat /var/plexguide/pgpatrol/video.transcodes)
   video4k=$(cat /var/plexguide/pgpatrol/video.transcodes4k)
@@ -263,7 +259,6 @@ question1() {
 [6] Check Interval                        [ $interval ]
 
 [7] Deploy Plex - Patrol                  [ $dstatus ]
-
 [8] Remove Plex - Patrol
 
 [C] Credits
@@ -277,64 +272,19 @@ EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
 
   case $typed in
-  1)
-    selection1
-	clear
-	question1
-    ;;
-  2)
-    selection2
-	clear
-	question1
-    ;;
-  3)
-    selection3
-	clear
-	question1
-    ;;
-  4)
-    selection4
-	clear
-	question1
-    ;;
-  5)
-    selection5
-	clear
-	question1
-    ;;
-  6)
-    selection6
-	clear
-	question1
-    ;;
-  7)
-	ansible-playbook /opt/pgpatrol/pgpatrol.yml && sleep 5
-	clear	
-	question1
-    ;;
-  8)
-	selection7
-	question1
-    ;;
-  C)
-	credits
-	clear
-	question1
-	;;
-  c)		
-	credits
-	clear
-	question1
-	;;
-  z)
-    exit
-    ;;
-  Z)
-    exit
-    ;;
-  *)
-    question1
-    ;;
+  1) selection1 && clear && question1 ;;
+  2) selection2 && clear && question1 ;;
+  3) selection3 && clear && question1 ;;
+  4) selection4 && clear && question1 ;;
+  5) selection5 && clear && question1 ;;
+  6) selection6 && clear && question1 ;;
+  7) ansible-playbook /opt/pgpatrol/pgpatrol.yml && sleep 5 && clear && question1 ;;
+  8) selection7 && question1 ;;
+  C) credits && clear && question1 ;;
+  c) credits && clear && question1 ;;
+  z) exit ;;
+  Z) exit ;;
+  *) question1 ;;
   esac
 }
 
