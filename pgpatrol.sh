@@ -178,7 +178,7 @@ Set a Number from [ 60 ] - [ 240 ] seconds
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "59" && "$typed" -le "241" ]]; then
-    echo -e "$typed" /var/plexguide/pgpatrol/check.interval && question1
+    echo -e "$typed" >/var/plexguide/pgpatrol/check.interval && question1
   else badinput; fi
 }
 selection7() {
