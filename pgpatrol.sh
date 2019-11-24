@@ -146,7 +146,7 @@ Set a Number from [ 1 ] - [ 10 ]
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "1" && "$typed" -le "10" ]]; then
-    echo "$typed" >/var/plexguide/pgpatrol/multiple.ips && question1
+    echo -e "$typed" >/var/plexguide/pgpatrol/multiple.ips && question1
   else badinput; fi
 }
 selection5() {
@@ -162,7 +162,7 @@ Set a Number from [ 5 ] - [ 250 ] Mintues
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "1" && "$typed" -le "250" ]]; then
-    echo "$typed" >/var/plexguide/pgpatrol/kick.minutes && question1
+    echo -e "$typed" >/var/plexguide/pgpatrol/kick.minutes && question1
   else badinput; fi
 }
 selection6() {
@@ -178,7 +178,7 @@ Set a Number from [ 60 ] - [ 240 ] seconds
 EOF
   read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" -ge "59" && "$typed" -le "241" ]]; then
-    echo "$typed" /var/plexguide/pgpatrol/check.interval && question1
+    echo -e "$typed" /var/plexguide/pgpatrol/check.interval && question1
   else badinput; fi
 }
 selection7() {
@@ -291,11 +291,11 @@ EOF
 # FUNCTIONS END ##############################################################
 plexcheck
 token
-variable /var/plexguide/pgpatrol/video.transcodes "false"
-variable /var/plexguide/pgpatrol/video.transcodes4k "true"
-variable /var/plexguide/pgpatrol/audio.transcodes "false"
-variable /var/plexguide/pgpatrol/check.interval "90"
-variable /var/plexguide/pgpatrol/multiple.ips "1"
-variable /var/plexguide/pgpatrol/kick.minutes "5"
+variable /var/plexguide/pgpatrol/video.transcodes "NON-SET"
+variable /var/plexguide/pgpatrol/video.transcodes4k "NON-SET"
+variable /var/plexguide/pgpatrol/audio.transcodes "NON-SET"
+variable /var/plexguide/pgpatrol/check.interval "NON-SET"
+variable /var/plexguide/pgpatrol/multiple.ips "NON-SET"
+variable /var/plexguide/pgpatrol/kick.minutes "NON-SET"
 deploycheck
 question1
