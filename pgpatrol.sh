@@ -234,7 +234,6 @@ EOF
 }
 # FIRST QUESTION
 question1() {
-
 deploycheck
 
   video=$(cat /var/plexguide/pgpatrol/video.transcodes)
