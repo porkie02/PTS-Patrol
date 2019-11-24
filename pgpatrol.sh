@@ -89,7 +89,7 @@ EOF
 
   case $typed in
   1) echo -e "false" >/var/plexguide/pgpatrol/video.transcodes && question1 ;;
-  2) echo -e"true" >/var/plexguide/pgpatrol/video.transcodes && question1 ;;
+  2) echo -e "true" >/var/plexguide/pgpatrol/video.transcodes && question1 ;;
   *) badinput ;;
   esac
 }
