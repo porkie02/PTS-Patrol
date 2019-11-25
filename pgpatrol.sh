@@ -10,12 +10,12 @@ question1(){
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📂  Sorry we removed this repo 
+📂  Sorry this repo is outdated and does not work anymore.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-sorry, but this repo does not exist anymore, 
+Sorry, but this repo does not exist anymore.
 
-please update your PTS version, thanks
+Please update your PTS version, thank you.
 
 [Z] - Exit
 
